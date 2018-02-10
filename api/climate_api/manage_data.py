@@ -22,7 +22,7 @@ class ManageDatabase:
         }
         return json_status
 
-    def set_status(self, power, temperature, ac_mode, fan):
+    def set_status(self, power, ac_mode, temperature, fan):
         self.cursor.execute(''' DELETE FROM status;''')
         self.cursor.execute(''' INSERT INTO status(power, ac_mode, temperature, fan) VALUES(?,?,?,?)''',
                             (power, ac_mode, temperature, fan))

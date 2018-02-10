@@ -45,5 +45,5 @@ class Temperature(Resource):
         """
         db = ManageDatabase()
         status = db.get_status()
-        return make_response(jsonify({status}), 200)
+        return make_response(jsonify(status), 200)
 

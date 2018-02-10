@@ -13,7 +13,14 @@ class ManageDatabase:
 
     def get_status(self):
         self.cursor.execute('''SELECT power, ac_mode, temperature, fan from status''')
-        return self.cursor.fetchone()
+        status = self.cursor.fetchone()
+        json_status = {
+            'power': status[0],
+            'ac_mode': status[1],
+            'temperature': status[2],
+            'fan': status[3]
+        }
+        return json_status
 
     def set_status(self, power, temperature, ac_mode, fan):
         self.cursor.execute(''' DELETE FROM status;''')

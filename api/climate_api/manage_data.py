@@ -16,7 +16,7 @@ class ManageDatabase:
         return self.cursor.fetchone()
 
     def set_status(self, power, temperature, ac_mode, fan):
-        self.cursor.execute(''' TRUNCATE TABLE status''')
+        self.cursor.execute(''' DELETE FROM TABLE status''')
         self.cursor.execute(''' INSERT INTO status(power, ac_mode, temperature, fan) VALUES(?,?,?,?)''',
                             (power, ac_mode, temperature, fan))
         self.db.commit()

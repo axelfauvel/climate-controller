@@ -12,3 +12,7 @@ flask_api = Api(flask_app)
 
 flask_api.add_resource(Power, '/v1/power/<status>')
 flask_api.add_resource(Temperature, '/v1/temperature')
+
+
+if __name__ == 'main':
+    flask_app.run(host='0.0.0.0', port=443, ssl_context='adhoc')

@@ -1,0 +1,44 @@
+from flask import request, make_response, abort, jsonify
+from flask_restful import Resource
+from manage_ac import power_management, temperature_management
+
+class Power(Resource):
+    """
+    Class that manages AC power
+    """
+    def put(self, status):
+        """
+        Method to manage AC power
+        :return:
+        """
+        if status in ['poweroff', 'poweron']:
+            if power_management(status):
+                return make_response(jsonify({}), 200)
+        abort(400)
+
+
+class Temperature(Resource):
+    """
+    Class that manages AC temp
+    """
+    def put(self):
+        """
+        change AC temp
+        :return:
+        """
+        if not request.json or not \
+                request.json.get('ac_mode') or not \
+                request.json.get('temperature') or not \
+                request.json.get('fan'):
+            abort(400)
+        if temperature_management(request.json.get('ac_mode'), request.json.get('temperature'), request.json.get('fan')):
+            return make_response(jsonify({}), 200)
+        abort(400)
+
+    def get(self):
+        """
+        method to retrieve current settings
+        :return:
+        """
+        pass
+

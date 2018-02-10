@@ -13,8 +13,13 @@ class Power(Resource):
         Method to manage AC power
         :return:
         """
-        if status in ['poweroff', 'poweron']:
+        if status == 'poweroff':
             if power_management(status):
+                return make_response(jsonify({}), 200)
+        elif status == 'poweron':
+            db = ManageDatabase()
+            status = db.get_status()
+            if temperature_management(status.ac_mode, status.temperature, status.fan):
                 return make_response(jsonify({}), 200)
         abort(400)
 

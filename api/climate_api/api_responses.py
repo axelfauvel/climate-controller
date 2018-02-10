@@ -15,12 +15,19 @@ class Power(Resource):
         """
         if status == 'poweroff':
             if power_management(status):
-                return make_response(jsonify({}), 200)
+                return make_response("AC is OFF", 200)
         elif status == 'poweron':
             db = ManageDatabase()
             status = db.get_status()
-            if temperature_management(status['ac_mode'], status['temperature'], status['fan']):
-                return make_response(jsonify({}), 200)
+            if temperature_management(
+                    status['ac_mode'],
+                    status['temperature'],
+                    status['fan']):
+                return make_response(
+                    "AC is ON \nTemperature : {}°".format(
+                        status['temperature']),
+                    200)
+
         abort(400)
 
 
@@ -38,9 +45,22 @@ class Temperature(Resource):
                 request.json.get('temperature') or not \
                 request.json.get('fan'):
             abort(400)
-        if temperature_management(request.json.get('ac_mode'), request.json.get('temperature'), request.json.get('fan')):
-            ManageDatabase().set_status('on', request.json.get('ac_mode'), request.json.get('temperature'), request.json.get('fan'))
-            return make_response(jsonify({}), 200)
+
+        if temperature_management(
+                request.json.get('ac_mode'),
+                request.json.get('temperature'),
+                request.json.get('fan')):
+            ManageDatabase().set_status(
+                'on',
+                request.json.get('ac_mode'),
+                request.json.get('temperature'),
+                request.json.get('fan'))
+            return make_response(
+                "AC mode : {}\nTemperature : {}°".format(
+                    request.json.get('ac_mode'),
+                    request.json.get('temperature')),
+                200)
+
         abort(400)
 
     def get(self):

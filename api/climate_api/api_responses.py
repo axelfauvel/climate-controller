@@ -19,7 +19,7 @@ class Power(Resource):
         elif status == 'poweron':
             db = ManageDatabase()
             status = db.get_status()
-            if temperature_management(status.ac_mode, status.temperature, status.fan):
+            if temperature_management(status['ac_mode'], status['temperature'], status['fan']):
                 return make_response(jsonify({}), 200)
         abort(400)
 

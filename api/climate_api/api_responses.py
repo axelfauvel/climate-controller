@@ -24,7 +24,8 @@ class Power(Resource):
                     status['temperature'],
                     status['fan']):
                 return make_response(
-                    "AC is ON \nTemperature : {}°".format(
+                    "AC is ON \nMode : {}\nTemperature : {}°".format(
+                        status['ac_mode'],
                         status['temperature']),
                     200)
 

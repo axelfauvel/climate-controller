@@ -1,6 +1,6 @@
 from flask import request, make_response, abort, jsonify
 from flask_restful import Resource
-from manage_ac import power_management, temperature_management
+from .manage_ac import power_management, temperature_management
 
 class Power(Resource):
     """

@@ -14,4 +14,6 @@ def temperature_management(ac_mode, temperature, fan):
 def send_command(command):
     launched = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, executable="/bin/bash")
     launched.wait()
-    return launched.returncode
+    if launched.returncode == 0:
+        return True
+    return False

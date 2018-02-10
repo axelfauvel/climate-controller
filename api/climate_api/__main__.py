@@ -2,9 +2,9 @@
 """
 main module
 """
-from flask import flask
+from flask import Flask
 from flask_restful import Api
-from api_responses import Power, Temperature, CurrentSettings
+from .api_responses import Power, Temperature
 
 
 flask_app = Flask(__name__)
@@ -14,5 +14,5 @@ flask_api.add_resource(Power, '/v1/power/<status>')
 flask_api.add_resource(Temperature, '/v1/temperature')
 
 
-if __name__ == 'main':
-    flask_app.run(host='0.0.0.0', port=443, ssl_context='adhoc')
+if __name__ == '__main__':
+    flask_app.run(host='0.0.0.0', port=8080, ssl_context='adhoc')

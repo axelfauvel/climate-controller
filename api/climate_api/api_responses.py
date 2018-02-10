@@ -1,6 +1,8 @@
 from flask import request, make_response, abort, jsonify
 from flask_restful import Resource
 from .manage_ac import power_management, temperature_management
+from .manage_data import ManageDatabase
+
 
 class Power(Resource):
     """
@@ -32,6 +34,7 @@ class Temperature(Resource):
                 request.json.get('fan'):
             abort(400)
         if temperature_management(request.json.get('ac_mode'), request.json.get('temperature'), request.json.get('fan')):
+            ManageDatabase().set_status('on', request.json.get('ac_mode'), request.json.get('temperature'), request.json.get('fan'))
             return make_response(jsonify({}), 200)
         abort(400)
 
@@ -40,5 +43,7 @@ class Temperature(Resource):
         method to retrieve current settings
         :return:
         """
-        pass
+        db = ManageDatabase()
+        status = db.get_status()
+        return make_response(jsonify({status}), 200)
 

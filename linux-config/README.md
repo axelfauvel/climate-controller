@@ -53,10 +53,13 @@ stop lircd
 `systemctl lircd stop`
 
 Trick, force raw mode recording  
-`irrecord -f -d /dev/lirc0 ~/lirc.conf`
+`irrecord -f -n -d /dev/lirc0 ~/lirc.conf`
 
 Copy config file  
 `sudo cp clim.lircd.conf /etc/lirc/lircd.conf`
 
 start lircd  
 `systemctl lircd start`
+
+update config file  
+`irrecord -f -n -u clim.lircd.conf`

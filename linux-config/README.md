@@ -49,14 +49,14 @@ restart device
 
 Start remote recording
 ---
-stop lircd
+stop lircd  
 `systemctl lircd stop`
 
-Trick, force raw mode recording
+Trick, force raw mode recording  
 `irrecord -f -d /dev/lirc0 ~/lirc.conf`
 
-Copy config file
+Copy config file  
 `sudo cp clim.lircd.conf /etc/lirc/lircd.conf`
 
-start lircd
+start lircd  
 `systemctl lircd start`

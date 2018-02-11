@@ -8,7 +8,7 @@ class Power(Resource):
     """
     Class that manages AC power
     """
-    def put(self, status):
+    def put(self, action):
         """
         Method to manage AC power
         :return:
@@ -16,7 +16,7 @@ class Power(Resource):
         db = ManageDatabase()
         status = db.get_status()
 
-        if status == 'poweroff':
+        if action == 'poweroff':
             if power_management(status):
                 db.set_status('off',
                               status['ac_mode'],
@@ -24,7 +24,7 @@ class Power(Resource):
                               status['fan'])
                 return make_response("AC is OFF", 200)
 
-        elif status == 'poweron':
+        elif action == 'poweron':
             if temperature_management(
                     status['ac_mode'],
                     status['temperature'],

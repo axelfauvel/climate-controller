@@ -10,7 +10,7 @@ from .manage_data import ManageDatabase
 flask_app = Flask(__name__)
 flask_api = Api(flask_app)
 
-flask_api.add_resource(Power, '/v1/power/<status>')
+flask_api.add_resource(Power, '/v1/power/<action>')
 flask_api.add_resource(Temperature, '/v1/temperature')
 flask_api.add_resource(Timer, '/v1/timer')
 

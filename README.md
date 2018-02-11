@@ -14,9 +14,10 @@ What can I do with that ?
 * You can start and stop your AC. It will restart using last preset
 * You can set a timer to stop your AC
 
-What can't I do with that ?
-===========================
+What remains to be done ?
+=========================
 * You can't change fan speed, I've only recorded temperatures in AUTO mode (this should be available sometimes) :)
+* Create proper setup / update script
 
 How can I install this ?
 ========================

@@ -61,11 +61,15 @@ apt-get install python3
 ```
 
 Copy `api/climate_api` dir in `/usr`
+set proper owner : `sudo chown -R pi:pi /usr/climate_api/`
+
 
 Setup dependancies
 ```
 pip install -r /usr/climate_api/requirements.txt
 ```
+
+
 
 Systemd
 -------

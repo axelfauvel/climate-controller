@@ -9,8 +9,7 @@ User=pi
 Group=pi
 UMask=007
 
-ExecStart=/home/pi/repo/climate-controller/api/systemd/climate-controller-start.sh
-ExecStop=/home/pi/repo/climate-controller/api/systemd/climate-controller-stop.sh
+ExecStart=/usr/bin/climate-controller-start.sh
 
 Restart=on-failure
 

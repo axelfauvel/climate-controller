@@ -13,12 +13,18 @@ class Power(Resource):
         Method to manage AC power
         :return:
         """
+        db = ManageDatabase()
+        status = db.get_status()
+
         if status == 'poweroff':
             if power_management(status):
+                db.set_status('off',
+                              status['ac_mode'],
+                              status['temperature'],
+                              status['fan'])
                 return make_response("AC is OFF", 200)
+
         elif status == 'poweron':
-            db = ManageDatabase()
-            status = db.get_status()
             if temperature_management(
                     status['ac_mode'],
                     status['temperature'],
@@ -45,21 +51,25 @@ class Temperature(Resource):
                 request.json.get('ac_mode') or not \
                 request.json.get('temperature') or not \
                 request.json.get('fan'):
-            abort(400)
+            abort("Missing mandatory parameter",400)
+
+        settings = {}
+        for key in ['ac_mode', 'temperature', 'fan']:
+            settings[key] = request.json.get(key)
 
         if temperature_management(
-                request.json.get('ac_mode'),
-                request.json.get('temperature'),
-                request.json.get('fan')):
+                settings['ac_mode'],
+                settings['temperature'],
+                settings['fan']):
             ManageDatabase().set_status(
                 'on',
-                request.json.get('ac_mode'),
-                request.json.get('temperature'),
-                request.json.get('fan'))
+                settings['ac_mode'],
+                settings['temperature'],
+                settings['fan'])
             return make_response(
                 "AC mode : {}\nTemperature : {}°".format(
-                    request.json.get('ac_mode'),
-                    request.json.get('temperature')),
+                    settings['ac_mode'],
+                    settings['temperature']),
                 200)
 
         abort(400)

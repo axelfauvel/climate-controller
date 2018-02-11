@@ -17,7 +17,7 @@ class Power(Resource):
         status = db.get_status()
 
         if action == 'poweroff':
-            if power_management(status):
+            if power_management(action):
                 db.set_status('off',
                               status['ac_mode'],
                               status['temperature'],

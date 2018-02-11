@@ -1,6 +1,6 @@
 from flask import request, make_response, abort, jsonify
 from flask_restful import Resource
-from .manage_ac import power_management, temperature_management
+from .manage_ac import power_management, temperature_management, timer
 from .manage_data import ManageDatabase
 
 
@@ -83,3 +83,23 @@ class Temperature(Resource):
         status = db.get_status()
         return make_response(jsonify(status), 200)
 
+
+class Timer(Resource):
+    def put(self):
+        """
+        Method to set a timer before AC goes OFF or ON
+        Methods awaits for JSON containing mandatory parameters
+        {action: poweroff, timer: time in minutes}
+        :return:
+        """
+        if not request.json or not \
+                request.json.get('action') or not \
+                request.json.get('timer'):
+            abort("Missing mandatory parameter",400)
+        if request.json.get('action') not in ['poweroff']:
+            abort("action should be poweroff", 400)
+
+        if timer(request.json.get('timer')):
+            return make_response("AC goes OFF in {} minutes".format(
+                request.json.get('timer')), 201)
+        abort(400)

@@ -51,7 +51,7 @@ class Temperature(Resource):
                 request.json.get('ac_mode') or not \
                 request.json.get('temperature') or not \
                 request.json.get('fan'):
-            abort("Missing mandatory parameter",400)
+            return make_response("Missing mandatory parameter",400)
 
         settings = {}
         for key in ['ac_mode', 'temperature', 'fan']:
@@ -95,9 +95,9 @@ class Timer(Resource):
         if not request.json or not \
                 request.json.get('action') or not \
                 request.json.get('timer'):
-            abort("Missing mandatory parameter",400)
+            return make_response("Missing mandatory parameter",400)
         if request.json.get('action') not in ['poweroff']:
-            abort("action should be poweroff", 400)
+            return make_response("action should be poweroff", 400)
 
         if timer(request.json.get('timer')):
             return make_response("AC goes OFF in {} minutes".format(

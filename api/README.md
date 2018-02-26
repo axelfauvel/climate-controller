@@ -1,3 +1,11 @@
+How to
+===
+
+Setup
+-----
+refer to [this doc](../setup.md)
+
+
 API call examples
 ---
 

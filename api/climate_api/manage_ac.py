@@ -17,3 +17,12 @@ def send_command(command):
     if launched.returncode == 0:
         return True
     return False
+
+
+def timer(timer):
+    time_to_wait = int(timer)*60
+    command = "sleep {} && curl -X PUT -k https://127.0.0.1:8080/v1/power/poweroff".\
+        format(str(time_to_wait))
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True,
+                     executable="/bin/bash")
+    return True

@@ -2,7 +2,7 @@ import sqlite3
 
 class ManageDatabase:
     def __init__(self):
-        self.db = sqlite3.connect('status.db')
+        self.db = sqlite3.connect('climate_api/status.db')
         self.cursor = self.db.cursor()
 
     def init_db(self):

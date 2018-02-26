@@ -1,4 +1,8 @@
-# Setup
+Setup
+=====
+
+Lirc
+---
 ```
 sudo apt-get update
 sudo apt-get install -y lirc
@@ -45,21 +49,30 @@ Append following config /boot/config.txt
 dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17
 ```
 
+copy `raspberry-confg/lircd/clim.lircd.conf` in `/etc/lirc/lircd.conf`
+
 restart device
 
-Start remote recording
+API
 ---
-stop lircd  
-`systemctl lircd stop`
+Setup Python3
+```
+apt-get install python3
+```
 
-Trick, force raw mode recording  
-`irrecord -f -n -d /dev/lirc0 ~/lirc.conf`
+Copy `api/climate_api` dir in `/usr`
+set proper owner : `sudo chown -R pi:pi /usr/climate_api/`
 
-Copy config file  
-`sudo cp clim.lircd.conf /etc/lirc/lircd.conf`
 
-start lircd  
-`systemctl lircd start`
+Setup dependancies
+```
+pip install -r /usr/climate_api/requirements.txt
+```
 
-update config file  
-`irrecord -f -n -u clim.lircd.conf`
+
+
+Systemd
+-------
+* Copy systemd/climate-controller.service in /etc/systemd/system
+* Copy systemd/climate-controller-start.sh in `/usr/bin`
+* Launch `sudo systemctl daemon-reload`

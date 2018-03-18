@@ -1,0 +1,55 @@
+
+a {
+text-decoration: none;
+margin-left: 30%;
+font-family: arial black;
+}
+
+p {
+font-family: arial black;
+text-decoration: none;
+text-align: center;
+}
+
+.status p {
+font-size: 4vw;
+color: black;
+}
+
+.power a {
+font-size: 8vw;
+color: black;
+}
+
+.power p {
+font-size: 4vw;
+color: black;
+}
+
+.chauffage a {
+font-size: 10vw;
+color: #FF3333;
+}
+
+.chauffage p {
+font-size: 8vw;
+color: #FF3333;
+}
+
+.clim a {
+font-size: 10vw;
+color: #00BFFF;
+}
+
+.clim p {
+font-size: 8vw;
+color: #00BFFF;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
